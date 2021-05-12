@@ -1,0 +1,12 @@
+serverHostName=<controller-dns>
+sys.languageId=en
+disableEULA=true
+
+platformAdmin.port=9191
+platformAdmin.databasePort=3377
+platformAdmin.databasePassword=appd
+platformAdmin.databaseRootPassword=appd
+platformAdmin.adminPassword=appd
+platformAdmin.useHttps$Boolean=false
+platformAdmin.dataDir=<appdynamics>/platform/mysql/data
+sys.installationDir=<appdynamics>/platform

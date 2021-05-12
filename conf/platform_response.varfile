@@ -1,0 +1,13 @@
+controllerDBPort=3388
+controllerProfile=demo
+controllerPrimaryHost=<primary-host>
+controllerAdminUsername=appd
+controllerPrimaryPort=8080
+controllerTenancyMode=multi
+controllerTenantAccountName=customer1
+controllerIiopPort=3700
+controllerAdminPort=4848
+controllerSSLPort=8181
+controllerAdminPassword=appd
+controllerRootUserPassword=appd
+newDatabaseRootPassword=appd
