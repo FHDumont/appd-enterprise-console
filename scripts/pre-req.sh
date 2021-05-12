@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./conf/settings.env
+source ../conf/settings.env
 
 filecount=`cat /etc/security/limits.d/appdynamics.conf | grep $USER | wc -l`
 if [[ $filecount == 0  ]]
@@ -26,9 +26,18 @@ then
     echo vm.max_map_count=262144 >> /etc/sysctl.conf
 fi
 
+if [[ ! -f  "/etc/profile.d/my-custom.lang.sh" ]];
+then
+    echo export LANG=en_US.UTF-8 > /etc/profile.d/my-custom.lang.sh
+    echo export LANGUAGE=en_US.UTF-8 >> /etc/profile.d/my-custom.lang.sh
+    echo export LC_COLLATE=C >> /etc/profile.d/my-custom.lang.sh
+    echo export LC_CTYPE=en_US.UTF-8 >> /etc/profile.d/my-custom.lang.sh
+fi
+source /etc/profile.d/my-custom.lang.sh
+
 echo ""
 echo "==> Installing requirements"
 echo "yum updating"
-# yum update -y -q
+yum update -y -q
 echo "yum installing packages"
-# yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig glibc jq git unzip
+yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig glibc jq git unzip
