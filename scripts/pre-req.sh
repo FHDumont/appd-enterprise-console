@@ -2,26 +2,23 @@
 
 source ../conf/settings.env
 
-filecount=`cat /etc/security/limits.d/appdynamics.conf | grep $USER | wc -l`
-if [[ $filecount == 0  ]]
+if [[ `cat /etc/security/limits.conf | grep $USER_NAME | wc -l` == 0  ]];
 then
-    echo $USER soft nofile 96000 > /etc/security/limits.d/appdynamics.conf
-    echo $USER hard nofile 96000 >> /etc/security/limits.d/appdynamics.conf
-    echo $USER soft nproc 8192 >> /etc/security/limits.d/appdynamics.conf
-    echo $USER hard nproc 8192 >> /etc/security/limits.d/appdynamics.conf
-    echo $USER soft memlock unlimited >> /etc/security/limits.d/appdynamics.conf
-    echo $USER hard memlock unlimited >> /etc/security/limits.d/appdynamics.conf
+    echo $USER_NAME soft nofile 96000 >> /etc/security/limits.conf
+    echo $USER_NAME hard nofile 96000 >> /etc/security/limits.conf
+    echo $USER_NAME soft nproc 8192 >> /etc/security/limits.conf
+    echo $USER_NAME hard nproc 8192 >> /etc/security/limits.conf
+    echo $USER_NAME soft memlock unlimited >> /etc/security/limits.conf
+    echo $USER_NAME hard memlock unlimited >> /etc/security/limits.conf
 fi
 
 swapoff -a
-filecount=`cat /etc/fstab | grep \#/dev/mapper/centos-swap | wc -l`
-if [[ $filecount == 0  ]]
+if [[ `cat /etc/fstab | grep \#/dev/mapper/centos-swap | wc -l` == 0  ]];
 then
     sed -i "s|/dev/mapper/centos-swap swap|#/dev/mapper/centos-swap swap|g" /etc/fstab
 fi
 
-filecount=`cat /etc/sysctl.conf | grep vm.max_map_count | wc -l`
-if [[ $filecount == 0  ]]
+if [[ `cat /etc/sysctl.conf | grep vm.max_map_count | wc -l` == 0  ]];
 then
     echo vm.max_map_count=262144 >> /etc/sysctl.conf
 fi
@@ -35,9 +32,15 @@ then
 fi
 source /etc/profile.d/my-custom.lang.sh
 
-echo ""
-echo "==> Installing requirements"
-echo "yum updating"
-yum update -y -q
-echo "yum installing packages"
-yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig glibc jq git unzip
+if [ $1 == false ];
+then
+    echo ""
+    echo "==> Installing requirements"
+    echo "yum updating"
+    yum update -y -q
+    echo "yum complete transaction"
+    yum-complete-transaction --cleanup-only -q
+    echo "yum installing packages"
+    yum -y -q install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig jq git unzip
+fi
