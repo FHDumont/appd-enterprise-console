@@ -82,8 +82,14 @@ if [ $INSTALL_CONTROLLER == true ];then
         cd $EC_FOLDER/platform-admin && ./bin/platform-admin.sh submit-job --platform-name MyPlatform --service controller --job install --arg-file $ARTIFACTS_FOLDER/platform_response.varfile
 
     fi
+    
     cd $PROJECT_FOLDER/scripts && ./startComponent.sh controller
-    cd $PROJECT_FOLDER/scripts && ./posInstallController.sh $HOST_NAME
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "appdynamics.on.premise.event.service.url" "http://localhost:9080"
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "eum.es.host" "http://localhost:9080"
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "eum.cloud.host" "http://localhost:7001"
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "eum.beacon.host" "$STATIC_DNS:7001"
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "eum.beacon.https.host" "$STATIC_DNS:7002"
+    cd $PROJECT_FOLDER/scripts && ./updateAdminSetting.sh $HOST_NAME "eum.mobile.screenshot.host" "$STATIC_DNS:7001"
 
     if [ $INSTALL_LICENSE == true ]; then
         cd $PROJECT_FOLDER/scripts && ./installLicense.sh controller

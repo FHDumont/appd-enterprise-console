@@ -29,6 +29,8 @@ then
   fi
   cp $PROJECT_FOLDER/conf/license.lic $PLATFORM_FOLDER/controller/license.lic
   touch $PLATFORM_FOLDER/controller/license.lic
+
+  cd $PROJECT_FOLDER/scripts && ./updateAccountLicense.sh $HOST_NAME
 fi
 
 if [ $INSTALL_EUM == true ];
