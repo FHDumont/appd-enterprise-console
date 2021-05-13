@@ -1,6 +1,6 @@
 sys.adminRights$Boolean=false
 sys.languageId=en
-sys.installationDir=/home/centos/appdynamics/EUM
+sys.installationDir=<appdynamics>/EUM
 euem.InstallationMode=demo
 euem.Host=localhost
 euem.initialHeapXms=1024
@@ -10,7 +10,7 @@ euem.httpsPort=7002
 mysql.databasePort=3388
 mysql.databaseRootUser=root
 mysql.dbHostName=localhost
-mysql.dataDir=/home/centos/appdynamics/platform/product/controller/db/data
+mysql.dataDir=<appdynamics-controller>/db/data
 mysql.rootUserPassword=appd
 mysql.rootUserPasswordReEnter=appd
 eumDatabasePassword=appd

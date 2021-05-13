@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../conf/settings.env
+source ./settings.sh
 
 EC_DOWNLOAD=false
 EUM_DOWNLOAD=false
@@ -20,9 +20,6 @@ done
 
 echo ""
 echo "==> Downloading Platform (if necessary)"
-
-cp ./getAgent.sh $ARTIFACTS_FOLDER/getAgent.sh
-chmod +x $ARTIFACTS_FOLDER/getAgent.sh
 
 # VERIFICANDO SE O EUM JÁ ESTÁ INSTALADO
 if [ $EUM_DOWNLOAD == true ]; then

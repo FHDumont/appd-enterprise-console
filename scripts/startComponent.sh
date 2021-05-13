@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../conf/settings.env
+source ./settings.sh
 
 START_EC=false
 START_CONTROLLER=false
@@ -8,6 +8,7 @@ START_ES=false
 START_EUM=false
 
 EC_RUNNING=false
+FORCE_LOGIN=false
 
 function error() {
   echo
@@ -19,19 +20,21 @@ function error() {
 
 while [ $# -gt 0 ]; do
   PARAM="${1,,}"
-  if [ "$PARAM" = "ec" ]; then
+  if [ "$PARAM" == "ec" ]; then
     START_EC=true
-  elif [[ "$PARAM" = "controller" ]]; then
+  elif [[ "$PARAM" == "controller" ]]; then
     START_CONTROLLER=true
-  elif [[ "$PARAM" = "es" ]]; then
+  elif [[ "$PARAM" == "es" ]]; then
     START_ES=true
-  elif [[ "$PARAM" = "eum" ]]; then
+  elif [[ "$PARAM" == "eum" ]]; then
     START_EUM=true
-  elif [[ "$PARAM" = "all" ]]; then
+  elif [[ "$PARAM" == "all" ]]; then
     START_EC=true
     START_CONTROLLER=true
     START_ES=true
     START_EUM=true
+  elif [ "$PARAM" = "--login" ]; then
+    FORCE_LOGIN=true
   fi
   shift
 done
@@ -50,7 +53,7 @@ if [[ $START_EC = false && $START_CONTROLLER = false && $START_ES = false && $ST
   exit 1
 fi
 
-if [[ ! -f  "$APPDYNAMICS_FOLDER/platform/platform-admin/bin/platform-admin.sh" ]]; then
+if [[ ! -f  "$EC_FOLDER/platform-admin/bin/platform-admin.sh" ]]; then
   error "EC doesn't installed"
 fi
 
@@ -61,7 +64,7 @@ fi
 if [[ $EC_RUNNING == false && $START_EC == true ]]; then
   echo ""
   echo "Starting EC"
-  cd $APPDYNAMICS_FOLDER/platform/platform-admin/bin \
+  cd $EC_FOLDER/platform-admin/bin \
       && ./platform-admin.sh start-platform-admin
 
   if [ `ps aux | grep -v grep | grep -i platformadminApplication.yml | wc -l` -ne 0 ]; then
@@ -74,35 +77,45 @@ if [ $EC_RUNNING == false ]; then
 fi
 
 # NECESSÁRIO PARA OS PRÓXIMOS COMANDOS, TAMBÉM VALIDA QUE A EC ESTÁ OK
-if [[ ! -f  "$APPDYNAMICS_FOLDER/platform/platform-admin/.appd.rc" ]]; then
+if [[ ! -f  "$EC_FOLDER/platform-admin/.appd.rc" || $FORCE_LOGIN == true ]]; then
   echo ""
   echo "Logging Platform"
-  cd $APPDYNAMICS_FOLDER/platform/platform-admin \
+  cd $EC_FOLDER/platform-admin \
       && ./bin/platform-admin.sh login --user-name admin --password appd
 fi
 
 if [ $START_CONTROLLER == true ]; then
-  if [[ ! -f  "$APPDYNAMICS_FOLDER/platform/controller/bin/startController.sh" ]]; then
+  if [[ ! -f  "$PLATFORM_FOLDER/controller/bin/startController.sh" ]]; then
     error "Controller doesn't installed"
   fi
 
   if [ `ps aux | grep -v grep | grep -i glassfish | wc -l` -eq 0 ]; then
     echo ""
     echo "Starting Controller"
-    cd $APPDYNAMICS_FOLDER/platform/platform-admin \
+    cd $EC_FOLDER/platform-admin \
         && ./bin/platform-admin.sh start-controller-appserver
   fi
 fi
 
 if [ $START_ES == true ]; then
-  if [[ ! -f  "$APPDYNAMICS_FOLDER/platform/events-service/processor/bin/events-service.sh" ]]; then
+  if [[ ! -f  "$PLATFORM_FOLDER/events-service/processor/bin/events-service.sh" ]]; then
     error "Event Services doesn't installed"
   fi
 
   if [ `ps aux | grep -v grep | grep -i events-service | wc -l` -eq 0 ]; then
     echo ""
     echo "Starting Event Services"
-    cd $APPDYNAMICS_FOLDER/platform/platform-admin \
+    cd $EC_FOLDER/platform-admin \
         && ./bin/platform-admin.sh restart-events-service
   fi
+fi
+
+if [ $START_EUM == true ]; then
+  if [[ ! -f  "$EUM_FOLDER/eum-processor/bin/eum.sh" ]]; then
+    error "EUM doesn't installed"
+  fi
+
+  echo "Starting EUM"
+  cd $EUM_FOLDER/eum-processor \
+      && ./bin/eum.sh start
 fi

@@ -4,9 +4,9 @@ disableEULA=true
 
 platformAdmin.port=9191
 platformAdmin.databasePort=3377
+platformAdmin.dataDir=<appdynamics>/enterpriseconsole/mysql/data
 platformAdmin.databasePassword=appd
 platformAdmin.databaseRootPassword=appd
 platformAdmin.adminPassword=appd
 platformAdmin.useHttps$Boolean=false
-platformAdmin.dataDir=<appdynamics>/platform/mysql/data
-sys.installationDir=<appdynamics>/platform
+sys.installationDir=<appdynamics>/enterpriseconsole
