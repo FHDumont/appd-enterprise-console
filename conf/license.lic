@@ -1,0 +1,81 @@
+meta:
+  version: 3.0.2
+  create-date: 2021-05-13T02:05:53Z
+license:
+  id: 162087153607HXT
+  expiration-date: 2021-08-10T00:00:00Z
+  customer:
+    id: cust
+    name: Appdynamics, Inc.
+    email: fernando.dumont@appdynamics.com
+  type: ONPREM-CONTROLLER
+  hardware-fingerprint: ANY
+  environment: PROD
+  packages:
+  - package: ENTERPRISE
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 100
+    properties:
+      dataRetentionDays: 60
+  - package: RUM_PEAK
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 10
+    properties:
+      dataRetentionDays: 60
+      eum-license-type: EUM_PRO
+      eum-unified-license-allows-overages: "false"
+      eum-unified-license-max-units: 10
+      mobile-license-type: MOBILE_PRO
+  - package: SYNTHETIC_PRIVATE_PRO_UNLIMITED
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 50
+    properties: {}
+  - package: PREMIUM
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 100
+    properties: {}
+  - package: INFRA
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 100
+    properties: {}
+  - package: IOT_PEAK
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 50
+    properties: {}
+  - package: LOG_ANALYTICS_PRO
+    create-date: 2021-05-12T00:00:00Z
+    start-date: 2021-05-12T00:00:00Z
+    expiration-date: 2021-08-10T00:00:00Z
+    type: TRIAL
+    license-units: 10
+    properties:
+      dataRetentionDays: 60
+  license-unit-ratios: []
+  properties:
+    eum-account-name: test-eum-account-fernandodumont-1620869929886
+    eum-deployment: onprem
+    eum-license-key: 1f01ffaf-ff94-42ec-95a9-cec54295a536
+---
+encryption:
+  algorithm: None
+signature:
+  algorithm: SHA256withRSA
+  value: b0177f6b38ccb5ad1a8d08c76b7efcce2573953506c2cd21a533e645bf4efb678da3e8b2013a2bde5387160dd6c0159ad9bb434f3d51d599ce54550687d832b6103b0576fd7d494482ac2c388dbddec2c69199e6e3a7d7565cff04f40b01a3e92dea940ac1cc5a67cf38fb632eff3a2f4c35139f2d5d139f496e55d8b2e7cf1fdad57db2f00c453a1bf68c00500ae8fd52473788b6f0133e5f610c88248badfd73938e394db4fa6442ddc7acb4974648f4fadd6084ea1de0c6899f6c6b4fc6b0a227df69e3f510b8a572f43bd2df7fdf50bd52c6734be9c62482d55dc95cc4686ac5f11d4456e69f83cb49fd58f310c706b7009f2aa247562755b0cdf57686b652064d1760fc6349b87d165705592a821a746a3e74db78723850751647de872ac83e6daabc8f5568b083c355b5127bb6e9e570673f39f694752afc329121ec56f100f8fa6993d2a4bbf9af804d3d7edd59175b0236c512921286ce66f081732d63596e8db8f6bfec978e472dac43d8a91db891c166111c8be7c7a295548a751eca061c83340e30bce3d6012d3bbc205b4b9ed0bcfb7a0ac5c7082b31662bd1cdafa2c9a2942b27d38199bd55e05ea6abfc7f60b0980b5c90ddcf66f7fdee6fb0f8bed54382e9e34fdfeeea777a5cd38b5cbf6b18027a41e25a93def4aca16a37ddde4d1f7b28fb1bf0cbf167b0daf72c09d3e878d4e0ed0ef8da6c40b3aa14df
