@@ -33,6 +33,10 @@ done
 EUM_ACCOUNT_NAME=`cat $PLATFORM_FOLDER/controller/license.lic | grep -i eum-account-name |  cut -d ':' -f2 | xargs`
 EUM_LICENSE_KEY=`cat $PLATFORM_FOLDER/controller/license.lic | grep -i eum-license-key |  cut -d ':' -f2 | xargs`
 
+# SE A LICENÇA FOR ABL ENTÃO TEM QUE PEGAR O VALOR DEPOIS DO =
+EUM_ACCOUNT_NAME=`echo $EUM_ACCOUNT_NAME |  cut -d '=' -f2 | xargs`
+EUM_LICENSE_KEY=`echo $EUM_LICENSE_KEY |  cut -d '=' -f2 | xargs`
+
 if [[ $jsessionId != "" ]] && [[ $csrfToken != "" ]]; then
 
 	JSON=`curl -s \
