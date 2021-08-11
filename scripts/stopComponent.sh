@@ -39,11 +39,37 @@ done
 if [[ $STOP_EC = false && $STOP_CONTROLLER = false && $STOP_ES = false && $STOP_EUM = false ]]; then
   echo
   echo "Valid Components names:"
+  echo "          ec"
+  echo "          controller"
+  echo "          es"
   echo "          eum"
+  echo "          all"
   echo
-  echo "Example: ./startComponent.sh ec controller"
+  echo "Example: ./stopComponent.sh ec controller"
   echo
   exit 1
+fi
+
+if [[ ! -f  "$EC_FOLDER/platform-admin/bin/platform-admin.sh" ]]; then
+  error "EC doesn't installed"
+fi
+
+if [ $STOP_CONTROLLER == true ]; then
+  echo ""
+  echo "Stopping Controller"
+  cd $EC_FOLDER/platform-admin \
+      && ./bin/platform-admin.sh stop-controller-appserver
+  echo ""
+  echo "Stopping Controller Database"
+  cd $EC_FOLDER/platform-admin \
+      && ./bin/platform-admin.sh stop-controller-db
+fi
+
+if [ $STOP_ES == true ]; then
+  echo ""
+  echo "==> Stopping Event Services"
+  cd $EC_FOLDER/platform-admin \
+      && ./bin/platform-admin.sh submit-job --platform-name MyPlatform --service events-service --job stop
 fi
 
 if [ $STOP_EUM == true ]; then
@@ -53,4 +79,11 @@ if [ $STOP_EUM == true ]; then
   echo "Stopping EUM"
   cd $EUM_FOLDER/eum-processor \
       && ./bin/eum.sh stop
+fi
+
+if [[ $STOP_EC == true ]]; then
+  echo ""
+  echo "Stopping EC"
+  cd $EC_FOLDER/platform-admin/bin \
+      && ./platform-admin.sh stop-platform-admin
 fi
