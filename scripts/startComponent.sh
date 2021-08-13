@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source ./settings.sh
-
+IS_BOOT=
 START_EC=false
 START_CONTROLLER=false
 START_ES=false
@@ -35,9 +34,18 @@ while [ $# -gt 0 ]; do
     START_EUM=true
   elif [ "$PARAM" = "--login" ]; then
     FORCE_LOGIN=true
+  elif [ "$PARAM" = "--boot" ]; then
+    IS_BOOT=--boot
   fi
   shift
 done
+
+CURRENT_FOLDER=`realpath .`
+if [[ $IS_BOOT = "--boot" ]]; then
+  CURRENT_FOLDER=$CURRENT_FOLDER/appd-enterprise-console/scripts
+fi
+
+source "$CURRENT_FOLDER/settings.sh" $IS_BOOT
 
 if [[ $START_EC = false && $START_CONTROLLER = false && $START_ES = false && $START_EUM = false ]]; then
   echo

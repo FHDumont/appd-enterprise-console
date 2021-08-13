@@ -1,6 +1,23 @@
 #!/bin/bash
 
-source ../conf/settings.env
+CURRENT_FOLDER=`realpath ./`
+CONF_FOLDER="../conf"
+IS_BOOT=
+
+while [ $# -gt 0 ]; do
+  PARAM="${1,,}"
+  if [ "$PARAM" = "--boot" ]; then
+    IS_BOOT=--boot
+  fi
+  shift
+done
+
+if [[ $IS_BOOT = "--boot" ]]; then
+  CONF_FOLDER=$CURRENT_FOLDER/appd-enterprise-console/conf
+  CURRENT_FOLDER=$CURRENT_FOLDER/appd-enterprise-console/scripts
+fi
+
+source "$CONF_FOLDER/settings.env"
 
 mkdir -p $ARTIFACTS_FOLDER
 mkdir -p $APPDYNAMICS_FOLDER
@@ -8,7 +25,7 @@ mkdir -p $APPDYNAMICS_FOLDER
 cp $PROJECT_FOLDER/conf/*.varfile $ARTIFACTS_FOLDER
 cp $PROJECT_FOLDER/conf/settings.env $ARTIFACTS_FOLDER
 
-cp ./getAgent.sh $ARTIFACTS_FOLDER/getAgent.sh
+cp $CURRENT_FOLDER/getAgent.sh $ARTIFACTS_FOLDER/getAgent.sh
 chmod +x $ARTIFACTS_FOLDER/getAgent.sh
 
 echo "" >> $ARTIFACTS_FOLDER/settings.env
