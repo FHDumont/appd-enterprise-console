@@ -4,12 +4,11 @@ CURRENT_FOLDER=`realpath ./`
 CONF_FOLDER="../conf"
 IS_BOOT=
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" = "--boot" ]; then
-    IS_BOOT=--boot
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "--boot" ]; then
+      IS_BOOT=--boot
+    fi
 done
 
 if [[ $IS_BOOT = "--boot" ]]; then

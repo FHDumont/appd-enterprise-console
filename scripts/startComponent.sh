@@ -17,27 +17,26 @@ function error() {
   exit 1
 }
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" == "ec" ]; then
-    START_EC=true
-  elif [[ "$PARAM" == "controller" ]]; then
-    START_CONTROLLER=true
-  elif [[ "$PARAM" == "es" ]]; then
-    START_ES=true
-  elif [[ "$PARAM" == "eum" ]]; then
-    START_EUM=true
-  elif [[ "$PARAM" == "all" ]]; then
-    START_EC=true
-    START_CONTROLLER=true
-    START_ES=true
-    START_EUM=true
-  elif [ "$PARAM" = "--login" ]; then
-    FORCE_LOGIN=true
-  elif [ "$PARAM" = "--boot" ]; then
-    IS_BOOT=--boot
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "ec" ]; then
+      START_EC=true
+    elif [ "$ARGUMENT" = "controller" ]; then
+      START_CONTROLLER=true
+    elif [ "$ARGUMENT" = "es" ]; then
+      START_ES=true
+    elif [ "$ARGUMENT" = "eum" ]; then
+      START_EUM=true
+    elif [ "$ARGUMENT" = "all" ]; then
+      START_EC=true
+      START_CONTROLLER=true
+      START_ES=true
+      START_EUM=true
+    elif [ "$ARGUMENT" = "--login" ]; then
+      FORCE_LOGIN=true
+    elif [ "$ARGUMENT" = "--boot" ]; then
+      IS_BOOT=--boot
+    fi
 done
 
 CURRENT_FOLDER=`realpath .`

@@ -14,29 +14,28 @@ INSTALL_CONTROLLER=false
 INSTALL_ES=false
 INSTALL_EUM=false
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" = "--update" ]; then
-    SKIP_UPDATE=false
-  elif [ "$PARAM" = "--download" ]; then
-    SKIP_DOWNLOAD=false
-  elif [ "$PARAM" = "--license" ]; then
-    INSTALL_LICENSE=true
-  elif [ "$PARAM" = "ec" ]; then
-    INSTALL_EC=true
-  elif [ "$PARAM" = "controller" ]; then
-    INSTALL_CONTROLLER=true
-  elif [ "$PARAM" = "es" ]; then
-    INSTALL_ES=true
-  elif [ "$PARAM" = "eum" ]; then
-    INSTALL_EUM=true
-  elif [ "$PARAM" = "all" ]; then
-    INSTALL_EC=true
-    INSTALL_CONTROLLER=true
-    INSTALL_ES=true
-    INSTALL_EUM=true
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "--update" ]; then
+      SKIP_UPDATE=false
+    elif [ "$ARGUMENT" = "--download" ]; then
+      SKIP_DOWNLOAD=false
+    elif [ "$ARGUMENT" = "--license" ]; then
+      INSTALL_LICENSE=true
+    elif [ "$ARGUMENT" = "ec" ]; then
+      INSTALL_EC=true
+    elif [ "$ARGUMENT" = "controller" ]; then
+      INSTALL_CONTROLLER=true
+    elif [ "$ARGUMENT" = "es" ]; then
+      INSTALL_ES=true
+    elif [ "$ARGUMENT" = "eum" ]; then
+      INSTALL_EUM=true
+    elif [ "$ARGUMENT" = "all" ]; then
+      INSTALL_EC=true
+      INSTALL_CONTROLLER=true
+      INSTALL_ES=true
+      INSTALL_EUM=true
+    fi
 done
 
 sudo ./pre-req.sh $SKIP_UPDATE

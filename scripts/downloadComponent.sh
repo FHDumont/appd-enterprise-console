@@ -5,17 +5,16 @@ source ./settings.sh
 EC_DOWNLOAD=false
 EUM_DOWNLOAD=false
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" = "ec" ]; then
-    EC_DOWNLOAD=true
-  elif [[ "$PARAM" = "eum" ]]; then
-    EUM_DOWNLOAD=true
-  elif [[ "$PARAM" = "all" ]]; then
-    EC_DOWNLOAD=true
-    EUM_DOWNLOAD=true
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "ec" ]; then
+      EC_DOWNLOAD=true
+    elif [ "$ARGUMENT" = "eum" ]; then
+      EUM_DOWNLOAD=true
+    elif [ "$ARGUMENT" = "all" ]; then
+      EC_DOWNLOAD=true
+      EUM_DOWNLOAD=true
+    fi
 done
 
 echo ""

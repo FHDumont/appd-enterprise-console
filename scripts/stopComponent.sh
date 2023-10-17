@@ -17,23 +17,22 @@ function error() {
   exit 1
 }
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" == "ec" ]; then
-    STOP_EC=true
-  elif [[ "$PARAM" == "controller" ]]; then
-    STOP_CONTROLLER=true
-  elif [[ "$PARAM" == "es" ]]; then
-    STOP_ES=true
-  elif [[ "$PARAM" == "eum" ]]; then
-    STOP_EUM=true
-  elif [[ "$PARAM" == "all" ]]; then
-    STOP_EC=true
-    STOP_CONTROLLER=true
-    STOP_ES=true
-    STOP_EUM=true
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "ec" ]; then
+      STOP_EC=true
+    elif [ "$ARGUMENT" = "controller" ]; then
+      STOP_CONTROLLER=true
+    elif [ "$ARGUMENT" = "es" ]; then
+      STOP_ES=true
+    elif [ "$ARGUMENT" = "eum" ]; then
+      STOP_EUM=true
+    elif [ "$ARGUMENT" = "all" ]; then
+      STOP_EC=true
+      STOP_CONTROLLER=true
+      STOP_ES=true
+      STOP_EUM=true
+    fi
 done
 
 if [[ $STOP_EC = false && $STOP_CONTROLLER = false && $STOP_ES = false && $STOP_EUM = false ]]; then

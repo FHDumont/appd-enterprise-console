@@ -7,12 +7,14 @@ SKIP_UPDATE=$1
 if [ x"$SKIP_UPDATE" == "x" ]; then
     SKIP_UPDATE=true
 else
-    PARAM="${1,,}"
-    if [[ "$PARAM" == "--update" || "$PARAM" == "false" ]]; then
-        SKIP_UPDATE=false
-    else 
-        SKIP_UPDATE=true
-    fi
+    for ARGUMENT in "$@"
+    do
+        if [[ "$ARGUMENT" == "--update" || "$ARGUMENT" == "false" ]]; then
+            SKIP_UPDATE=false
+        else 
+            SKIP_UPDATE=true
+        fi
+    done
 fi
 
 # echo "SKIP: $SKIP_UPDATE"

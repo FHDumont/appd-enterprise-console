@@ -36,20 +36,17 @@ function isVersionGreater()
     fi
 }
 
-while [ $# -gt 0 ]; do
-
-  PARAM="${1,,}"
-  if [ "$PARAM" = "-listonly" ]; then
-    LISTONLY=true
-  elif [[ "$PARAM" == -minversion=* ]]; then
-    MIN_VERSION="${PARAM#*=}"
-  elif [[ "$PARAM" == -version=* ]]; then
-    VERSION="${PARAM#*=}"
-  else
-    COMPONENT=$PARAM
-  fi
-  shift
-
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "-listonly" ]; then
+      LISTONLY=true
+    elif [[ "$ARGUMENT" == -minversion=* ]]; then
+      MIN_VERSION="${ARGUMENT#*=}"
+    elif [[ "$ARGUMENT" == -version=* ]]; then
+      VERSION="${ARGUMENT#*=}"
+    else
+      COMPONENT=$ARGUMENT
+    fi
 done
 
 # Usage

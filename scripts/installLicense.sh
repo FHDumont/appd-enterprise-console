@@ -5,17 +5,16 @@ source ./settings.sh
 INSTALL_CONTROLLER=false
 INSTALL_EUM=false
 
-while [ $# -gt 0 ]; do
-  PARAM="${1,,}"
-  if [ "$PARAM" = "controller" ]; then
-    INSTALL_CONTROLLER=true
-  elif [ "$PARAM" = "eum" ]; then
-    INSTALL_EUM=true
-  elif [ "$PARAM" = "all" ]; then
-    INSTALL_CONTROLLER=true
-    INSTALL_EUM=true
-  fi
-  shift
+for ARGUMENT in "$@"
+do
+    if [ "$ARGUMENT" = "controller" ]; then
+      INSTALL_CONTROLLER=true
+    elif [ "$ARGUMENT" = "eum" ]; then
+      INSTALL_EUM=true
+    elif [ "$ARGUMENT" = "all" ]; then
+      INSTALL_CONTROLLER=true
+      INSTALL_EUM=true
+    fi
 done
 
 if [ $INSTALL_CONTROLLER == true ];
