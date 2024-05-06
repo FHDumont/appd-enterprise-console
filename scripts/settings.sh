@@ -19,7 +19,8 @@ fi
 source "$CONF_FOLDER/settings.env"
 
 mkdir -p $ARTIFACTS_FOLDER
-mkdir -p $APPDYNAMICS_FOLDER
+sudo mkdir -p $APPDYNAMICS_FOLDER
+sudo chown $USER_NAME: $APPDYNAMICS_FOLDER
 
 cp $PROJECT_FOLDER/conf/*.varfile $ARTIFACTS_FOLDER
 cp $PROJECT_FOLDER/conf/settings.env $ARTIFACTS_FOLDER

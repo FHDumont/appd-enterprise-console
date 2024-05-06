@@ -7,7 +7,7 @@ START_ES=false
 START_EUM=false
 
 EC_RUNNING=false
-FORCE_LOGIN=false
+FORCE_LOGIN=true
 
 function error() {
   echo
@@ -32,8 +32,6 @@ do
       START_CONTROLLER=true
       START_ES=true
       START_EUM=true
-    elif [ "$ARGUMENT" = "--login" ]; then
-      FORCE_LOGIN=true
     elif [ "$ARGUMENT" = "--boot" ]; then
       IS_BOOT=--boot
     fi

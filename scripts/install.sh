@@ -133,5 +133,5 @@ if [ $INSTALL_EUM == true ];then
 fi
 
 echo ""
-echo "==> Enterprise Console installed!"
+echo "==> Script finished"
 echo ""

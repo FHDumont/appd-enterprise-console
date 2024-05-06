@@ -5,7 +5,6 @@ controllerAdminUsername=appd
 controllerPrimaryPort=8090
 controllerTenancyMode=single
 controllerTenantAccountName=customer1
-controllerIiopPort=3700
 controllerAdminPort=4848
 controllerSSLPort=8181
 controllerAdminPassword=appd

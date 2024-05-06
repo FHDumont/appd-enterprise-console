@@ -61,11 +61,14 @@ source /etc/profile.d/my-custom.lang.sh
 if [ $SKIP_UPDATE == false ];then
     echo ""
     echo "==> Installing requirements"
-    echo "yum updating"
-    yum update -y -q
-    echo "yum complete transaction"
-    yum-complete-transaction --cleanup-only -q
-    echo "yum installing packages"
-    yum -y -q install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig jq git unzip
+    # echo "yum updating"
+    echo "apt updating"
+    apt update -y -q
+    # yum update -y -q
+    # echo "yum complete transaction"
+    # yum-complete-transaction --cleanup-only -q
+    echo "apt installing packages"
+    # yum -y -q install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    # yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig jq git unzip
+    apt install numactl tzdata net-tools fontconfig jq git unzip libncurses5
 fi
