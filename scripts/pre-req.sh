@@ -70,5 +70,5 @@ if [ $SKIP_UPDATE == false ];then
     echo "apt installing packages"
     # yum -y -q install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     # yum install -y -q libaio numactl tzdata ncurses-libs-5.* net-tools fontconfig jq git unzip
-    apt install numactl tzdata net-tools fontconfig jq git unzip libncurses5
+    apt -y install numactl tzdata net-tools fontconfig jq git unzip libncurses5 libaio1
 fi
